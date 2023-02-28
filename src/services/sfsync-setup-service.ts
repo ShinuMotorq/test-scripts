@@ -24,6 +24,7 @@ class SnowflakeSyncSetupService extends Service {
         await this.validateAndCreateSchema();
         let stageName = await this.validateAndCreateStage();
         await this.sfSyncSetupManager.createAndAlterFileformat(Constants.avroFileFormatName, stageName)
+        await this.setupReplayTables()
     }
 
     async validateAndCreateSchema() {
