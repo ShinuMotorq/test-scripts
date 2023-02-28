@@ -2,7 +2,7 @@ class Service {
 
     constructor() { }
 
-    init() {
+    async init() {
         throw Error("No implementation found for the requested service")
     }
     

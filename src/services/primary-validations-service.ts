@@ -9,7 +9,7 @@ class PrimaryValidationService extends Service {
         super();
     }
 
-    init() {
+    async init() {
 
     }
 }

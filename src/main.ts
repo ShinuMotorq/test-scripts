@@ -8,7 +8,7 @@ import { RequestType } from "./common/enums";
 async function main() {    
     let args = await (new CommonUtils()).getParams();
     let service : Service = (new ServiceProvider()).getService(RequestType[args.type])
-    service.init()    
+    await service.init();
 }
 
-main()
+main();

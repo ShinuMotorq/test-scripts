@@ -12,11 +12,12 @@ class SnowflakeSyncSetupService extends Service {
         this.sfSyncSetupManager = new SnowflakeSyncSetupManager();
     }
 
-    init() {
-        this.checkAndValidateSchema();
+    async init() {
+        await this.validateAndCreateSchema();
+        await this.validateAndCreateStage();
     }
 
-    async checkAndValidateSchema() {
+    async validateAndCreateSchema() {
         let schemaName = appConfig.snowflakeSchema
         if (schemaName) {
             let schemas = await this.sfSyncSetupManager.getAllSchemas();
@@ -31,12 +32,22 @@ class SnowflakeSyncSetupService extends Service {
         }
     }
 
-    async checkAndValidateStage() {
-        await this.sfSyncSetupManager.createStage(
-            appConfig.snowflakeStage,
-            appConfig.blobStorage?.containerConfig.containerUrl,
-            appConfig.blobStorage?.containerConfig.containerToken)
-        
+    async validateAndCreateStage() {
+        let stageName = appConfig.snowflakeStage;
+        if (stageName) {
+            let stages = await this.sfSyncSetupManager.getAllStages();
+            if (stages.includes(stageName)) {
+                throw Error(`Stage : ${stageName} already exists!`)
+            } else {
+                await this.sfSyncSetupManager.createStage(
+                    stageName,
+                    appConfig.blobStorage?.containerConfig.containerUrl,
+                    appConfig.blobStorage?.containerConfig.containerToken)
+            }
+        } else {
+            throw Error("Missing config 'snowflakeStage'");
+        }
+
     }
 }
 

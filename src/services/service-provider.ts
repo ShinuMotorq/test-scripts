@@ -4,9 +4,7 @@ import SnowflakeSyncSetupService from "./sfsync-setup-service";
 
 class ServiceProvider {
 
-    constructor() {
-
-    }
+    constructor() { }
 
     getService(requestType : RequestType) {
         switch(requestType) {
