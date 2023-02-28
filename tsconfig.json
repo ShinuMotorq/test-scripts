@@ -1,0 +1,32 @@
+{
+    "include" : [
+        "src/**/*"
+    ],
+    "compilerOptions": {
+        "rootDir": "src",
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es6",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "dist",
+        "declaration": true,
+        "declarationMap": false,
+        "declarationDir": "types",
+        "strict": true,
+        "noImplicitAny": false,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noUnusedLocals": false,        
+        "noUnusedParameters": false,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "preserveSymlinks": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+    },
+    "lib": [
+        "es2015"
+    ],
+    "noUnusedLocals": false
+}

@@ -1,0 +1,27 @@
+{
+  "name": "test-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "snowflake-sdk": "^1.6.16"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.13.0",
+    "@types/snowflake-sdk": "^1.6.12",
+    "@types/yargs": "^17.0.22",
+    "dotenv": "^16.0.3",
+    "joi": "^17.8.3",
+    "string-template": "^1.0.0",
+    "yargs": "^17.7.1"
+  }
+}

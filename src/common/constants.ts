@@ -1,0 +1,1 @@
+export const avroFileFormatName: string = 'avro_file_format';

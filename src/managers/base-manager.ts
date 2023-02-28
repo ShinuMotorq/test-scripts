@@ -1,0 +1,7 @@
+class Manager {
+    constructor() {}
+
+    cleanUp() {
+        
+    }
+}
