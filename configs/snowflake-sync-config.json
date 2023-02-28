@@ -1,0 +1,4 @@
+{
+    "prod_environment" : "HIVE_PROD",
+    "prod_schema": "PROD_V3"
+}

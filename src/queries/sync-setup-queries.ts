@@ -11,10 +11,10 @@ export const CreateStage: string =
 export const CreateFileFormat: string = `CREATE OR REPLACE FILE FORMAT "{avroFileFormatName}" TYPE = avro;`
 export const AlterStageFileFormat: string = `ALTER STAGE {stageName} SET file_format = "{avroFileFormatName}"`
 export const CreateReplayTables: Array<string> = [
-    'CREATE TABLE INIT_LOAD_V3 LIKE {prodDB}.{prodSchema}.INIT_LOAD_V3',
-    'CREATE TABLE TELEMETRY_INTERNAL LIKE {prodDB}.{prodSchema}.TELEMETRY_INTERNAL',
-    'CREATE TABLE EVENTS_INTERNAL LIKE {prodDB}.{prodSchema}.EVENTS_INTERNAL',
-    'CREATE TABLE TRIPS_INTERNAL LIKE {prodDB}.{prodSchema}.TRIPS_INTERNAL'
+    'CREATE OR REPLACE TABLE INIT_LOAD_V3 LIKE {prodDB}.{prodSchema}.INIT_LOAD_V3',
+    'CREATE OR REPLACE TABLE TELEMETRY_INTERNAL LIKE {prodDB}.{prodSchema}.TELEMETRY_INTERNAL',
+    'CREATE OR REPLACE TABLE EVENTS_INTERNAL LIKE {prodDB}.{prodSchema}.EVENTS_INTERNAL',
+    'CREATE OR REPLACE TABLE TRIPS_INTERNAL LIKE {prodDB}.{prodSchema}.TRIPS_INTERNAL'
 ]
 export const CreateFunctions: Array<string> = [
     `CREATE OR REPLACE FUNCTION getPositionV3(position string)

@@ -1,20 +1,29 @@
 import SnowflakeClient from '../clients/snowflakes-client';
 import appConfig from '../common/configs';
+import * as Constants from '../common/constants';
 import { SnowflakeSyncSetupManager } from '../managers/sfsync-setup-manager'
+import { SnowflakeSyncServiceConfig } from '../objects/sfsync-service-config';
 
 
 class SnowflakeSyncSetupService extends Service {
 
     private sfSyncSetupManager: SnowflakeSyncSetupManager;
+    private serviceConfig : SnowflakeSyncServiceConfig;
 
     constructor() {
         super();
-        this.sfSyncSetupManager = new SnowflakeSyncSetupManager();
+        this.serviceConfig = this.fetchServiceConfig()
+        this.sfSyncSetupManager = new SnowflakeSyncSetupManager(this.serviceConfig);        
+    }
+
+    fetchServiceConfig(): SnowflakeSyncServiceConfig {
+        return require('../../configs/snowflake-sync-config.json')
     }
 
     async init() {
         await this.validateAndCreateSchema();
-        await this.validateAndCreateStage();
+        let stageName = await this.validateAndCreateStage();
+        await this.sfSyncSetupManager.createAndAlterFileformat(Constants.avroFileFormatName, stageName)
     }
 
     async validateAndCreateSchema() {
@@ -47,7 +56,12 @@ class SnowflakeSyncSetupService extends Service {
         } else {
             throw Error("Missing config 'snowflakeStage'");
         }
+        return stageName;
+    }
 
+    async setupReplayTables() {
+        await this.sfSyncSetupManager.createReplayTables();
+        await this.sfSyncSetupManager.createNeccessaryFunctions();
     }
 }
 

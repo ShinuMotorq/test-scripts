@@ -1,13 +1,21 @@
 import SnowflakeClient from "../clients/snowflakes-client";
 import * as SnowflakeSyncSetupQueries from "../queries/sync-setup-queries"
 import * as format from 'string-template';
+import DataAccess from "./base-data-access";
 
 
-class SnowflakeSyncSetupDataAccess {
+class SnowflakeSyncSetupDataAccess extends DataAccess {
 
     private sfClient: SnowflakeClient | null = null
 
-    constructor() { }
+    constructor() {
+        super()
+    }
+
+    async runPreparedStatement(query) {
+        this.sfClient = await SnowflakeClient.getInstance();
+        return await this.sfClient.runStatement(query);
+    }
 
     async showSchemas(): Promise<any> {
         this.sfClient = await SnowflakeClient.getInstance();
@@ -20,12 +28,12 @@ class SnowflakeSyncSetupDataAccess {
         // console.log(rows)
 
         this.sfClient = await SnowflakeClient.getInstance();
-        return await this.sfClient!.runStatement(format(SnowflakeSyncSetupQueries.CreateSchema, { schemaName }))        
+        return await this.sfClient!.runStatement(format(SnowflakeSyncSetupQueries.CreateSchema, { schemaName }))
     }
 
     async useSchema(schemaName: string | undefined) {
         this.sfClient = await SnowflakeClient.getInstance();
-        return await this.sfClient!.runStatement(format(SnowflakeSyncSetupQueries.UseSchema, { schemaName }))        
+        return await this.sfClient!.runStatement(format(SnowflakeSyncSetupQueries.UseSchema, { schemaName }))
     }
 
     async showStages() {
@@ -39,7 +47,7 @@ class SnowflakeSyncSetupDataAccess {
             stageName,
             containerUrl,
             containerToken,
-        }))        
+        }))
     }
 
     async createFileFormat(avroFileFormatName) {
@@ -56,6 +64,7 @@ class SnowflakeSyncSetupDataAccess {
             stageName
         }));
     }
+
 }
 
 export default SnowflakeSyncSetupDataAccess;
