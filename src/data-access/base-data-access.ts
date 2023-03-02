@@ -1,8 +1,9 @@
-import SnowflakeClient from "../clients/snowflakes-client";
+import logger from "../common/logger";
 
-class DataAccess {    
+class DataAccess {
 
-    constructor() { }
-  
+    constructor() {
+    }
+
 }
 export default DataAccess;

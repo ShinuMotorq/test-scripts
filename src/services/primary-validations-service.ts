@@ -1,4 +1,5 @@
 import { PrimaryValidationServiceConfig } from '../objects/primary-validation-service-config';
+import Service from './base-service';
 
 
 class PrimaryValidationService extends Service {

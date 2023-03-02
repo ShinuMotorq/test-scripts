@@ -23,3 +23,10 @@ export enum RequestType {
     SNOWFLAKE_SYNC = "snowflake_sync",
     PRIMARY_VALIDATIONS = "primary_validations"
 }
+
+export enum LogLevel {
+    Debug,
+    Info,
+    Warn,
+    Error,
+}

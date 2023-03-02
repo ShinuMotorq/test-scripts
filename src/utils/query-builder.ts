@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { SqlKeywords, SqlSelectOptions } from '../common/enums';
 
 /**
- * @deprecated - Not required in current scope
+ * @deprecated - Not required for current scope
  * Builds simple queries
  */
 class QueryBuilder {

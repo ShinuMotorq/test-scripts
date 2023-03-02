@@ -1,6 +1,7 @@
 export const ShowSchemas: string = 'SHOW SCHEMAS'
 export const CreateSchema: string = 'CREATE OR REPLACE SCHEMA {schemaName};'
 export const UseSchema: string = 'USE SCHEMA {schemaName};'
+export const DropSchema: string = 'DROP SCHEMA {schemaName};'
 
 export const ShowStages: string = 'SHOW STAGES'
 export const CreateStage: string =
@@ -8,8 +9,8 @@ export const CreateStage: string =
     url = '{containerUrl}'
     credentials = (azure_sas_token = '{containerToken}');`
 
-export const CreateFileFormat: string = `CREATE OR REPLACE FILE FORMAT "{avroFileFormatName}" TYPE = avro;`
-export const AlterStageFileFormat: string = `ALTER STAGE {stageName} SET file_format = "{avroFileFormatName}"`
+export const CreateFileFormat: string = `CREATE OR REPLACE FILE FORMAT {avroFileFormatName} TYPE = avro;`
+export const AlterStageFileFormat: string = `ALTER STAGE {stageName} SET file_format = {avroFileFormatName}`
 export const CreateReplayTables: Array<string> = [
     'CREATE OR REPLACE TABLE INIT_LOAD_V3 LIKE {prodDB}.{prodSchema}.INIT_LOAD_V3',
     'CREATE OR REPLACE TABLE TELEMETRY_INTERNAL LIKE {prodDB}.{prodSchema}.TELEMETRY_INTERNAL',

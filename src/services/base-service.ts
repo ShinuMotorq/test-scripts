@@ -1,8 +1,10 @@
-class Service {
+import logger from "../common/logger"
+
+class Service {    
 
     constructor() { }
 
-    fetchServiceConfig(): any {
+    fetchServiceConfig(): any {        
         throw Error("No implementation found for 'fetchServiceConfig' for the requested service")
     }
 
@@ -11,3 +13,5 @@ class Service {
     }
     
 }
+
+export default Service

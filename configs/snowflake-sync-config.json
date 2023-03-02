@@ -1,4 +1,6 @@
 {
-    "prod_environment" : "HIVE_PROD",
-    "prod_schema": "PROD_V3"
+    "prod_environment": "TSD_PROD",
+    "prod_schema": "PROD_V3",
+    "schema_name": "RLSTEST_310_TOYOTA_2",
+    "stage_name": "RLSTEST_310_TOYOTA_STG_2"
 }

@@ -1,6 +1,7 @@
 import { RequestType } from "../common/enums";
+import Service from "./base-service";
 import PrimaryValidationService from "./primary-validations-service";
-import SnowflakeSyncSetupService from "./sfsync-setup-service";
+import SnowflakeSyncService from "./snowflakes-sync-service";
 
 class ServiceProvider {
 
@@ -8,8 +9,9 @@ class ServiceProvider {
 
     getService(requestType : RequestType) {
         switch(requestType) {
-            case RequestType.SNOWFLAKE_SYNC : return new SnowflakeSyncSetupService();
+            case RequestType.SNOWFLAKE_SYNC : return new SnowflakeSyncService();
             case RequestType.PRIMARY_VALIDATIONS : return new PrimaryValidationService();
+            default : return new Service();
         }
     }
 }

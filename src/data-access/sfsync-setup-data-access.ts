@@ -1,7 +1,10 @@
 import SnowflakeClient from "../clients/snowflakes-client";
-import * as SnowflakeSyncSetupQueries from "../queries/sync-setup-queries"
-import * as format from 'string-template';
+import * as SnowflakeSyncSetupQueries from "../queries/sf-setup-queries"
+import format from 'string-template'
 import DataAccess from "./base-data-access";
+import logger from '../common/logger';
+import Errors from "../common/errors";
+import BaseErrorHandler from "../clients/error-handler";
 
 
 class SnowflakeSyncSetupDataAccess extends DataAccess {
@@ -13,56 +16,57 @@ class SnowflakeSyncSetupDataAccess extends DataAccess {
     }
 
     async runPreparedStatement(query) {
-        this.sfClient = await SnowflakeClient.getInstance();
-        return await this.sfClient.runStatement(query);
+        try {
+            this.sfClient = await SnowflakeClient.getInstance();
+            return await this.sfClient.runStatement(query);
+        } catch (err) {
+            throw new BaseErrorHandler(Errors.SnowflakeQueryFailed, { query, err })
+        }
     }
 
     async showSchemas(): Promise<any> {
-        this.sfClient = await SnowflakeClient.getInstance();
-        return await this.sfClient.runStatement(SnowflakeSyncSetupQueries.ShowSchemas)
+        return this.runPreparedStatement(SnowflakeSyncSetupQueries.ShowSchemas)
     }
 
     async createSchema(schemaName: string | undefined): Promise<any> {
-        // let connection = await SnowflakeDBClient.getConnection()
-        // let rows: any = await this.snowflakesClient.runStatement(connection, format(SnowflakeSyncSetupQueries.CreateSchema, { schemaName }))
-        // console.log(rows)
-
-        this.sfClient = await SnowflakeClient.getInstance();
-        return await this.sfClient!.runStatement(format(SnowflakeSyncSetupQueries.CreateSchema, { schemaName }))
+        let query = format(SnowflakeSyncSetupQueries.CreateSchema, { schemaName })
+        return this.runPreparedStatement(query)
     }
 
     async useSchema(schemaName: string | undefined) {
-        this.sfClient = await SnowflakeClient.getInstance();
-        return await this.sfClient!.runStatement(format(SnowflakeSyncSetupQueries.UseSchema, { schemaName }))
+        let query = format(SnowflakeSyncSetupQueries.UseSchema, { schemaName })
+        return this.runPreparedStatement(query)
     }
 
     async showStages() {
-        this.sfClient = await SnowflakeClient.getInstance();
-        return await this.sfClient.runStatement(SnowflakeSyncSetupQueries.ShowStages)
+        return this.runPreparedStatement(SnowflakeSyncSetupQueries.ShowStages)
     }
 
     async createStage(stageName, containerUrl, containerToken) {
-        this.sfClient = await SnowflakeClient.getInstance()
-        return await this.sfClient!.runStatement(format(SnowflakeSyncSetupQueries.CreateStage, {
+        let query = format(SnowflakeSyncSetupQueries.CreateStage, {
             stageName,
             containerUrl,
             containerToken,
-        }))
+        })
+        return this.runPreparedStatement(query);
     }
 
     async createFileFormat(avroFileFormatName) {
-        this.sfClient = await SnowflakeClient.getInstance()
-        return await this.sfClient.runStatement(format(SnowflakeSyncSetupQueries.CreateFileFormat, {
-            avroFileFormatName
-        }));
+        let query = format(SnowflakeSyncSetupQueries.CreateFileFormat, { avroFileFormatName })
+        return this.runPreparedStatement(query)
     }
 
     async alterStageFileFormat(avroFileFormatName, stageName) {
-        this.sfClient = await SnowflakeClient.getInstance()
-        return await this.sfClient.runStatement(format(SnowflakeSyncSetupQueries.AlterStageFileFormat, {
+        let query = format(SnowflakeSyncSetupQueries.AlterStageFileFormat, {
             avroFileFormatName,
             stageName
-        }));
+        })
+        return this.runPreparedStatement(query)
+    }
+
+    async dropSchema(schemaName: string | undefined): Promise<any> {
+        let query = format(SnowflakeSyncSetupQueries.DropSchema, { schemaName })
+        return this.runPreparedStatement(query)
     }
 
 }

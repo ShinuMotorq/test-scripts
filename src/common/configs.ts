@@ -16,8 +16,8 @@ const appConfig: AppConfig = {
         warehouse: process.env.SNOWFLAKE_WAREHOUSE,
         role: process.env.SNOWFLAKE_ROLE
     },
-    snowflakeSchema: process.env.SNOWFLAKE_SCHEMA,
-    snowflakeStage: process.env.SNOWFLAKE_STAGE,
+    // snowflakeSchema: process.env.SNOWFLAKE_SCHEMA,
+    // snowflakeStage: process.env.SNOWFLAKE_STAGE,
     blobStorage: {
         blobStorageConnectionString: process.env.BLOB_STORAGE_CONNECTION_STRING || "",
         storageAccountAccessKey: process.env.AZURE_STORAGE_ACCESS_KEY || "",
