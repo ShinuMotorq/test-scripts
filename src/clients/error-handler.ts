@@ -18,9 +18,11 @@ class BaseErrorHandler extends Error {
 
     private throwError() {
         let errorMessage = this.error.description;
+        let templateParam = {}
         for (let param in this.params) {
-            errorMessage = format(errorMessage, { [param]: this.params[param] })
-        }        
+            templateParam[param] = this.params[param]
+        }
+        errorMessage = format(errorMessage, templateParam)
         throw Error(errorMessage);
     }
 

@@ -1,3 +1,3 @@
 export type Args = {
-    type: string
+    type: Array<string>
 }

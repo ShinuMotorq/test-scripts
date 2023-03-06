@@ -20,6 +20,7 @@ export enum SqlSelectOptions {
 }
 
 export enum RequestType {
+    SNOWFLAKE_SETUP = "snowflake_setup",
     SNOWFLAKE_SYNC = "snowflake_sync",
     PRIMARY_VALIDATIONS = "primary_validations"
 }

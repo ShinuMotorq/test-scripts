@@ -22,8 +22,8 @@ class SnowflakeClient {
             try {
                 SnowflakeClient.instance = new SnowflakeClient();
                 await SnowflakeClient.instance.connect();
-            } catch (err) {
-                throw new BaseErrorHandler(Errors.SnowflakeConnectionFailed, { err })
+            } catch (err: any) {
+                throw new BaseErrorHandler(Errors.SnowflakeConnectionFailed, { error: err.message })
             }
         }
         return SnowflakeClient.instance;
@@ -46,6 +46,7 @@ class SnowflakeClient {
 
     public async runStatement(sqlStatement: string, binds?: any[]) {
         const me = this;
+        logger.info(me.scope, `Executing query : "${sqlStatement}"`)        
         return new Promise((resolve, reject) => {
             this.connection!.execute({
                 sqlText: sqlStatement,
@@ -55,7 +56,7 @@ class SnowflakeClient {
                         logger.error(me.scope, `Failed to execute statement : "${stmt.getSqlText()}" due to the following error: \n${err.message}`);
                         reject(err)
                     } else {
-                        logger.info(me.scope, `"${stmt.getSqlText()}" executed successfully!`)
+                        logger.info(me.scope, `Query executed successfully!`)
                         resolve(rows)
                     }
                 }

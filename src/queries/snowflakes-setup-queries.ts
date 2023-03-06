@@ -8,6 +8,7 @@ export const CreateStage: string =
     `CREATE OR REPLACE STAGE {stageName}
     url = '{containerUrl}'
     credentials = (azure_sas_token = '{containerToken}');`
+export const VerifyStage: string = 'list @{stageName};'
 
 export const CreateFileFormat: string = `CREATE OR REPLACE FILE FORMAT {avroFileFormatName} TYPE = avro;`
 export const AlterStageFileFormat: string = `ALTER STAGE {stageName} SET file_format = {avroFileFormatName}`
