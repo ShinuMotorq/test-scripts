@@ -1,6 +1,6 @@
 import appConfig from '../common/configs';
 import * as Constants from '../common/constants';
-import { SnowflakeSetupServiceConfig } from '../objects/snowflakes-setup-service-config';
+import { SnowflakeSetupServiceConfig } from '../objects/config-schemas/snowflakes-setup-service-config';
 import Service from './base-service';
 import logger from "../common/logger"
 import SnowflakeClient from '../clients/snowflakes-client';
@@ -46,7 +46,7 @@ class SnowflakeSetupService extends Service {
             // -- TearDown scripts here --
             
             // Uncomment below line only for testing
-            // await this.sfSyncSetupManager.dropSchema(this.serviceConfig.schema_name)
+            // await this.sfSyncSetupManager.dropSchema(this.serviceConfig.schemaName)
             await SnowflakeClient.terminateOpenConnection()
         }
         logger.info(this.scope, "~~~~~~ Snowflake setup ends here ~~~~~~")
@@ -59,7 +59,7 @@ class SnowflakeSetupService extends Service {
      */
     async validateAndCreateSchema() {
         logger.info(this.scope, "Verifying if schema already exists...")
-        let schemaName = this.serviceConfig.schema_name //appConfig.snowflakeSchema
+        let schemaName = this.serviceConfig.schemaName //appConfig.snowflakeSchema
         if (schemaName) {
             let schemas = await this.snowflakesSetupManager.getAllSchemas();
             if (schemas.includes(schemaName)) {
@@ -79,7 +79,7 @@ class SnowflakeSetupService extends Service {
      * 3. Creates new stage
      */
     async validateAndCreateStage() {
-        let stageName = this.serviceConfig.stage_name // appConfig.snowflakeStage;
+        let stageName = this.serviceConfig.stageName // appConfig.snowflakeStage;
         if (stageName) {
             let stages = await this.snowflakesSetupManager.getAllStages();
             if (stages.includes(stageName)) {

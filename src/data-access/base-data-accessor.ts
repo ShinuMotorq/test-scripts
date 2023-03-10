@@ -1,9 +1,9 @@
 import logger from "../common/logger";
 
-class DataAccess {
+class DataAccessor {
 
     constructor() {
     }
 
 }
-export default DataAccess;
+export default DataAccessor;

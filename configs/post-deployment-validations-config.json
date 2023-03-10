@@ -1,0 +1,8 @@
+{
+    "environment": "HIVE_PROD",
+    "schema": "PROD_V3",
+    "prevStartTimestamp": "2023-02-27T16:00:00.000Z",
+    "prevEndTimestamp": "2023-02-27T23:00:00.000Z",
+    "currentStartTimestamp": "2023-02-28T16:00:00.000Z",
+    "currentEndTimestamp": "2023-02-28T23:00:00.000Z"
+}

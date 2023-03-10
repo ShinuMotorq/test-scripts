@@ -1,26 +1,26 @@
-import SnowflakeSyncDataAccess from '../data-access/snowflakes-sync-data-access';
-import { SnowflakeSyncServiceConfig } from '../objects/snowflakes-sync-service-config';
+import SnowflakeSyncDataAccessor from '../data-access/snowflakes-sync-data-accessor';
+import { SnowflakeSyncServiceConfig } from '../objects/config-schemas/snowflakes-sync-service-config';
 import Manager from './base-manager';
 import logger from "../common/logger";
 
 class SnowflakeSyncManager extends Manager {
-    private snowflakesSyncDataAccess: SnowflakeSyncDataAccess | null = null
+    private snowflakesSyncDataAccess: SnowflakeSyncDataAccessor | null = null
     private serviceConfig: SnowflakeSyncServiceConfig
     private scope = 'SnowflakeSetupManager'
 
     constructor(serviceConfig: SnowflakeSyncServiceConfig) {
         super();
         this.serviceConfig = serviceConfig;
-        this.snowflakesSyncDataAccess = new SnowflakeSyncDataAccess();
+        this.snowflakesSyncDataAccess = new SnowflakeSyncDataAccessor();
     }
 
     async loadAndDedupFeedData() {
-        let rows: any = await this.snowflakesSyncDataAccess!.useSchema(this.serviceConfig.schema_name);
+        let rows: any = await this.snowflakesSyncDataAccess!.useSchema(this.serviceConfig.schemaName);
         logger.info(this.scope, `Snowflakes response : ${rows[0].status}`)
         rows = await this.snowflakesSyncDataAccess!.loadFeedDataFromStage(
-            this.serviceConfig.db_name,
-            this.serviceConfig.schema_name,
-            this.serviceConfig.stage_name)
+            this.serviceConfig.dbName,
+            this.serviceConfig.schemaName,
+            this.serviceConfig.stageName)
         logger.info(this.scope, `Snowflakes response : ${rows[0].status}`)
         rows = await this.snowflakesSyncDataAccess!.createDedupTempFromFeed();
         logger.info(this.scope, `Snowflakes response : ${rows[0].status}`)

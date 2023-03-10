@@ -1,8 +1,8 @@
 import * as SnowflakeSyncSetupQueries from "../queries/snowflakes-setup-queries"
 import * as format from 'string-template';
 import SnowflakeClient from "../clients/snowflakes-client";
-import SnowflakeSetupDataAccess from "../data-access/snowflakes-setup-data-access";
-import { SnowflakeSetupServiceConfig } from "../objects/snowflakes-setup-service-config";
+import SnowflakeSetupDataAccessor from "../data-access/snowflakes-setup-data-accessor";
+import { SnowflakeSetupServiceConfig } from "../objects/config-schemas/snowflakes-setup-service-config";
 import logger from "../common/logger";
 import Manager from './base-manager';
 
@@ -10,14 +10,14 @@ class SnowflakeSetupManager extends Manager{
     /**
      * @todo : decouple DB calls to DAO class with abstraction over different DB
      */    
-    private snowflakesSetupDataAccess: SnowflakeSetupDataAccess | null = null
+    private snowflakesSetupDataAccess: SnowflakeSetupDataAccessor | null = null
     private serviceConfig: SnowflakeSetupServiceConfig
     private scope = 'SnowflakeSetupManager'
 
     constructor(serviceConfig: SnowflakeSetupServiceConfig) {
         super()
         this.serviceConfig = serviceConfig;
-        this.snowflakesSetupDataAccess = new SnowflakeSetupDataAccess()
+        this.snowflakesSetupDataAccess = new SnowflakeSetupDataAccessor()
     }
 
     async getAllSchemas(): Promise<string[]> {
@@ -65,8 +65,8 @@ class SnowflakeSetupManager extends Manager{
     async createReplayTables() {
         for (let statement of SnowflakeSyncSetupQueries.CreateReplayTables) {
             let rows: any = await this.snowflakesSetupDataAccess?.runPreparedStatement(format.default(statement, {
-                prodDB: this.serviceConfig.prod_environment,
-                prodSchema: this.serviceConfig.prod_schema
+                prodDB: this.serviceConfig.prodEnvironment,
+                prodSchema: this.serviceConfig.prodSchema
             }))
             logger.info(this.scope, `Snowflakes response : ${rows[0].status}`)
         }

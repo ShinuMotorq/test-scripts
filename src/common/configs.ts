@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { AppConfig } from '../schemas/config-schemas';
+import { AppConfig } from '../schemas/app-config-schemas';
 
 /**
  * All configs init here
@@ -16,6 +16,7 @@ const appConfig: AppConfig = {
         warehouse: process.env.SNOWFLAKE_WAREHOUSE,
         role: process.env.SNOWFLAKE_ROLE
     },
+    // -- Moving below configs to service level configs --
     // snowflakeSchema: process.env.SNOWFLAKE_SCHEMA,
     // snowflakeStage: process.env.SNOWFLAKE_STAGE,
     blobStorage: {

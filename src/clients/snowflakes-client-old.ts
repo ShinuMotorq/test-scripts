@@ -1,6 +1,6 @@
 import * as snowflake from "snowflake-sdk";
 import { config } from 'dotenv';
-import { SnowflakeConnectionConfig } from '../objects/snowflakes-config'
+import { SnowflakeConnectionConfig } from '../objects/config-schemas/snowflakes-config'
 import appConfig from "../common/configs";
 
 /**

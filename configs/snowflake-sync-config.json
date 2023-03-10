@@ -1,5 +1,5 @@
 {
-    "db_name": "QUALITY_TEAM",
-    "schema_name": "RLSTEST_310_TOYOTA_2",
-    "stage_name": "RLSTEST_310_TOYOTA_STG_2"
+    "dbName": "QUALITY_TEAM",
+    "schemaName": "RLSTEST_310_FORD_MERC_PILOT",
+    "stageName": "RLSTEST_310_FORD_MERC_PILOT_STG"
 }

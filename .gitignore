@@ -1,5 +1,6 @@
 /types
 /dist
+/reports
 /node_modules/
 .env
 .vscode

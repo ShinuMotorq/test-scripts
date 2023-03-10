@@ -11,7 +11,6 @@ export enum SqlKeywords {
     ON = 'ON',
     IN = 'IN',
     CREATE = 'CREATE'
-
 }
 
 export enum SqlSelectOptions {
@@ -20,9 +19,11 @@ export enum SqlSelectOptions {
 }
 
 export enum RequestType {
+    RESOURCE_CREATION = "resource_creation",
     SNOWFLAKE_SETUP = "snowflake_setup",
     SNOWFLAKE_SYNC = "snowflake_sync",
-    PRIMARY_VALIDATIONS = "primary_validations"
+    POST_DEPLOYMENT_VALIDATION = "post_deployment_validation",
+    REGRESSION_PREP = "regression_prep"
 }
 
 export enum LogLevel {

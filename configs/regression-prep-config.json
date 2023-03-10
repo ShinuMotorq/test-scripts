@@ -1,0 +1,25 @@
+{
+    "vehicles": {
+        "datasource": "Ford",
+        "entities": [
+            {
+                "prodEnvironment": "MERCHANTS_PROD",
+                "prodSchema": "PROD_V3"
+            }
+        ]
+    },
+    "prodTables": {
+        "minTimestamp": "2023-02-28T00:00:00.000Z",
+        "maxTimestamp": "2023-03-05T00:00:00.000Z",
+        "prodEnvironment": "MERCHANTS_PILOT",
+        "prodSchema": "PILOT_V3",
+        "prodTelemetryTableName": "PROD_TELEMETRY_INTERNAL_1",
+        "prodEventsTableName": "PROD_EVENTS_INTERNAL_1",
+        "prodTripsTableName": "PROD_TRIPS_INTERNAL_1"
+    },
+    "replayContext": {
+        "dbName": "QUALITY_TEAM",
+        "schemaName": "RLSTEST_310_FORD_MERC_PILOT",
+        "stageName": "RLSTEST_310_FORD_MERC_PILOT_STG"
+    }
+}

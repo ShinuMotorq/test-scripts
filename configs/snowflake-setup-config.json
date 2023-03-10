@@ -1,6 +1,6 @@
 {
-    "prod_environment": "TSD_PROD",
-    "prod_schema": "PROD_V3",
-    "schema_name": "RLSTEST_310_TOYOTA_2",
-    "stage_name": "RLSTEST_310_TOYOTA_STG_2"
+    "prodEnvironment": "MERCHANTS_PILOT",
+    "prodSchema": "PILOT_V3",
+    "schemaName": "RLSTEST_310_FORD_MERC_PILOT",
+    "stageName": "RLSTEST_310_FORD_MERC_PILOT_STG"
 }
